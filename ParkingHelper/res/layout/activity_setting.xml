@@ -8,6 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingActivity" >
 
+    <SeekBar
+        android:id="@+id/hourSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hourTextView"
+        android:layout_marginTop="16dp" />
+    
     <TextView
         android:id="@+id/minuteTextView"
         android:layout_width="wrap_content"
@@ -17,39 +24,31 @@
         android:text="Minute: 0"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <SeekBar
-        android:id="@+id/hourSeekBar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/hourTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/minuteSeekBar"
-        android:layout_below="@+id/minuteTextView"
-        android:layout_marginTop="16dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/setButton"
+        android:layout_marginTop="60dp"
+        android:text="Hour: 0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
         android:id="@+id/minuteSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/minuteTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="34dp" />
-
-    <TextView
-        android:id="@+id/hourTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/minuteSeekBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
-        android:text="Hour: 0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/hourSeekBar"
+        android:layout_below="@+id/minuteTextView"
+        android:layout_marginTop="18dp" />
 
     <Button
         android:id="@+id/setButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hourSeekBar"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp"
+        android:layout_marginBottom="56dp"
         android:onClick="writeToSDFile"
         android:text="@string/setButton" />
 

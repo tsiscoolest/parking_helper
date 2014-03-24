@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 public class SettingActivity extends Activity {
 
-	private int alarmHour;
-	private int alarmMinute;
+	private String alarmHour = "";
+	private String alarmMinute = "";
 	private String fileName = "AlarmSetting.txt";
 	private static final String TAG = "MEDIA";
 
@@ -33,7 +33,7 @@ public class SettingActivity extends Activity {
 			this.finish();
 		}
 
-		writeToSDFile();
+		seekBar();
 	}
 
 	@Override
@@ -57,19 +57,38 @@ public class SettingActivity extends Activity {
 		SeekBar minuteSeekBar = (SeekBar) findViewById(R.id.minuteSeekBar);
 
 		hourSeekBar.setMax(12);
-		hourSeekBar.setProgress(0);
+		hourSeekBar.setProgress(6);
 		minuteSeekBar.setMax(60);
-		minuteSeekBar.setProgress(0);
+		minuteSeekBar.setProgress(30);
 
 		hourSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				progress = progress + 10; // Add the minimum value (10)
-				TextView text = (TextView) v.findViewById(R.id.max_price);
-				text.setText(Integer.toString(progress)
-						+ PlaceListActivity.this.getResources().getString(R.string.dong));
-				maxPrice = progress;
+				// progress = progress + 10; // Add the minimum value (10)
+				TextView text = (TextView) findViewById(R.id.hourTextView);
+				text.setText("Hour: " + Integer.toString(progress));
+				// maxPrice = progress;
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+		});
+
+		minuteSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				// progress = progress + 10; // Add the minimum value (10)
+				TextView text = (TextView) findViewById(R.id.minuteTextView);
+				text.setText("Minute: " + Integer.toString(progress));
+				// maxPrice = progress;
 			}
 
 			@Override
@@ -94,15 +113,13 @@ public class SettingActivity extends Activity {
 
 		// Find the root of the external storage.
 		// See http://developer.android.com/guide/topics/data/data-
-		// storage.html#filesExternal
+		// storage.html#filesExternal\
 
-		/*
-		 * TimePicker alarmTimePicker = (TimePicker)
-		 * findViewById(R.id.alarmTimePicker);
-		 * 
-		 * alarmHour = alarmTimePicker.getCurrentHour(); alarmMinute =
-		 * alarmTimePicker.getCurrentMinute();
-		 */
+		TextView hourText = (TextView) findViewById(R.id.hourTextView);
+		TextView minuteText = (TextView) findViewById(R.id.minuteTextView);
+
+		alarmHour = hourText.toString();
+		alarmMinute = minuteText.toString();
 
 		File root = android.os.Environment.getExternalStorageDirectory();
 
@@ -113,8 +130,8 @@ public class SettingActivity extends Activity {
 		try {
 			FileOutputStream f = new FileOutputStream(file);
 			PrintWriter pw = new PrintWriter(f);
-			pw.println("alarmHour");
-			pw.println("alarmMinute");
+			pw.println(alarmHour);
+			pw.println(alarmMinute);
 			pw.flush();
 			pw.close();
 			f.close();

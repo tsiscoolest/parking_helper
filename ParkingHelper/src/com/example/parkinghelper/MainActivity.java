@@ -44,6 +44,11 @@ public class MainActivity extends Activity {
 		// set content view AFTER ABOVE sequence (to avoid crash)
 		this.setContentView(R.layout.activity_main);
 
+		if (!isExternalStorageWritable()) {
+			Toast.makeText(getBaseContext(), "External storage is not available!", Toast.LENGTH_SHORT).show();
+			this.finish();
+		}
+
 		startCamera();
 		// setAlarm();
 	}
@@ -184,5 +189,14 @@ public class MainActivity extends Activity {
 
 		Toast.makeText(getBaseContext(), "Successfully read new alarm time: " + alarmHour + " " + alarmMinute,
 				Toast.LENGTH_SHORT).show();
+	}
+
+	/* Checks if external storage is available for read and write */
+	public boolean isExternalStorageWritable() {
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			return true;
+		}
+		return false;
 	}
 }
