@@ -1,0 +1,128 @@
+package com.example.parkinghelper;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class SettingActivity extends Activity {
+
+	private int alarmHour;
+	private int alarmMinute;
+	private String fileName = "AlarmSetting.txt";
+	private static final String TAG = "MEDIA";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_setting);
+
+		if (!isExternalStorageWritable()) {
+			Toast.makeText(getBaseContext(), "External storage is not available!", Toast.LENGTH_SHORT).show();
+			this.finish();
+		}
+
+		writeToSDFile();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.setting, menu);
+		return true;
+	}
+
+	/* Checks if external storage is available for read and write */
+	public boolean isExternalStorageWritable() {
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			return true;
+		}
+		return false;
+	}
+
+	public void seekBar() {
+		SeekBar hourSeekBar = (SeekBar) findViewById(R.id.hourSeekBar);
+		SeekBar minuteSeekBar = (SeekBar) findViewById(R.id.minuteSeekBar);
+
+		hourSeekBar.setMax(12);
+		hourSeekBar.setProgress(0);
+		minuteSeekBar.setMax(60);
+		minuteSeekBar.setProgress(0);
+
+		hourSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				progress = progress + 10; // Add the minimum value (10)
+				TextView text = (TextView) v.findViewById(R.id.max_price);
+				text.setText(Integer.toString(progress)
+						+ PlaceListActivity.this.getResources().getString(R.string.dong));
+				maxPrice = progress;
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+		});
+	}
+
+	/**
+	 * Method to write ascii text characters to file on SD card. Note that you
+	 * must add a WRITE_EXTERNAL_STORAGE permission to the manifest file or this
+	 * method will throw a FileNotFound Exception because you won't have write
+	 * permission.
+	 */
+
+	public void writeToSDFile() {
+
+		// Find the root of the external storage.
+		// See http://developer.android.com/guide/topics/data/data-
+		// storage.html#filesExternal
+
+		/*
+		 * TimePicker alarmTimePicker = (TimePicker)
+		 * findViewById(R.id.alarmTimePicker);
+		 * 
+		 * alarmHour = alarmTimePicker.getCurrentHour(); alarmMinute =
+		 * alarmTimePicker.getCurrentMinute();
+		 */
+
+		File root = android.os.Environment.getExternalStorageDirectory();
+
+		File dir = new File(root.getAbsolutePath() + "/Pictures/ParkingHelper");
+		dir.mkdirs();
+		File file = new File(dir, fileName);
+
+		try {
+			FileOutputStream f = new FileOutputStream(file);
+			PrintWriter pw = new PrintWriter(f);
+			pw.println("alarmHour");
+			pw.println("alarmMinute");
+			pw.flush();
+			pw.close();
+			f.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			Log.i(TAG, "******File not found. Did you" + " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
