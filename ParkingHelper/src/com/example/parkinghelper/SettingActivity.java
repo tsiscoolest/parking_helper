@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -34,6 +36,15 @@ public class SettingActivity extends Activity {
 		}
 
 		seekBar();
+		
+		Button btn = (Button) findViewById(R.id.setButton);
+
+		btn.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+		    	writeToSDFile(v);
+		    }
+		});
 	}
 
 	@Override
@@ -109,7 +120,7 @@ public class SettingActivity extends Activity {
 	 * permission.
 	 */
 
-	public void writeToSDFile() {
+	public void writeToSDFile(View v) {
 
 		// Find the root of the external storage.
 		// See http://developer.android.com/guide/topics/data/data-
@@ -118,8 +129,8 @@ public class SettingActivity extends Activity {
 		TextView hourText = (TextView) findViewById(R.id.hourTextView);
 		TextView minuteText = (TextView) findViewById(R.id.minuteTextView);
 
-		alarmHour = hourText.toString();
-		alarmMinute = minuteText.toString();
+		alarmHour = hourText.getText().toString();
+		alarmMinute = minuteText.getText().toString();
 
 		File root = android.os.Environment.getExternalStorageDirectory();
 
@@ -135,11 +146,14 @@ public class SettingActivity extends Activity {
 			pw.flush();
 			pw.close();
 			f.close();
+			Toast.makeText(getBaseContext(), "New alarm setting successfully saved!", Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			Log.i(TAG, "******File not found. Did you" + " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		this.finish();
 	}
 }
