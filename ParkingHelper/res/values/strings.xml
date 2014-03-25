@@ -9,7 +9,7 @@
     <string name="alarmMinute"></string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="setButton">Set</string>
+    <string name="setButton">Save Alarm Setting</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

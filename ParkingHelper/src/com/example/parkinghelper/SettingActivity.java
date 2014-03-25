@@ -1,8 +1,10 @@
 package com.example.parkinghelper;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,8 +22,8 @@ import android.widget.Toast;
 
 public class SettingActivity extends Activity {
 
-	private String alarmHour = "";
-	private String alarmMinute = "";
+	private String alarmHour = "12";
+	private String alarmMinute = "30";
 	private String fileName = "AlarmSetting.txt";
 	private static final String TAG = "MEDIA";
 
@@ -37,6 +39,11 @@ public class SettingActivity extends Activity {
 
 		seekBar();
 		buttonOnClick();
+
+		TextView text = (TextView) findViewById(R.id.hourTextView);
+		text.setText("Hour: " + alarmHour);
+		text = (TextView) findViewById(R.id.minuteTextView);
+		text.setText("Minute: " + alarmMinute);
 	}
 
 	@Override
@@ -56,22 +63,22 @@ public class SettingActivity extends Activity {
 	}
 
 	public void seekBar() {
+		readFile();
+
 		SeekBar hourSeekBar = (SeekBar) findViewById(R.id.hourSeekBar);
 		SeekBar minuteSeekBar = (SeekBar) findViewById(R.id.minuteSeekBar);
 
 		hourSeekBar.setMax(23);
-		hourSeekBar.setProgress(12);
+		hourSeekBar.setProgress(Integer.parseInt(alarmHour));
 		minuteSeekBar.setMax(59);
-		minuteSeekBar.setProgress(30);
+		minuteSeekBar.setProgress(Integer.parseInt(alarmMinute));
 
 		hourSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				// progress = progress + 10; // Add the minimum value (10)
 				TextView text = (TextView) findViewById(R.id.hourTextView);
 				text.setText("Hour: " + Integer.toString(progress));
-				// maxPrice = progress;
 			}
 
 			@Override
@@ -88,10 +95,8 @@ public class SettingActivity extends Activity {
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				// progress = progress + 10; // Add the minimum value (10)
 				TextView text = (TextView) findViewById(R.id.minuteTextView);
 				text.setText("Minute: " + Integer.toString(progress));
-				// maxPrice = progress;
 			}
 
 			@Override
@@ -103,6 +108,32 @@ public class SettingActivity extends Activity {
 			}
 
 		});
+	}
+
+	private void readFile() {
+		File root = android.os.Environment.getExternalStorageDirectory();
+
+		File dir = new File(root.getAbsolutePath() + "/Pictures/ParkingHelper");
+		dir.mkdirs();
+		File file = new File(dir, fileName);
+
+		// Read text from file
+		BufferedReader br = null;
+
+		try {
+			br = new BufferedReader(new FileReader(file));
+			String line;
+
+			if ((line = br.readLine()) != null) alarmHour = line;
+
+			if ((line = br.readLine()) != null) alarmMinute = line;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			Log.i(TAG, "******File not found. Did you" + " add a READ_EXTERNAL_STORAGE permission to the manifest?");
+			// writeFile();
+		} catch (IOException e) {
+			// You'll need to add proper error handling here
+		}
 	}
 
 	private void buttonOnClick() {
@@ -132,9 +163,15 @@ public class SettingActivity extends Activity {
 		TextView hourText = (TextView) findViewById(R.id.hourTextView);
 		TextView minuteText = (TextView) findViewById(R.id.minuteTextView);
 
-		alarmHour = hourText.getText().toString();
-		alarmMinute = minuteText.getText().toString();
+		alarmHour = hourText.getText().toString().replaceAll("Hour: ", "");
+		alarmMinute = minuteText.getText().toString().replaceAll("Minute: ", "");
 
+		writeFile();
+
+		this.finish();
+	}
+
+	private void writeFile() {
 		File root = android.os.Environment.getExternalStorageDirectory();
 
 		File dir = new File(root.getAbsolutePath() + "/Pictures/ParkingHelper");
@@ -156,7 +193,5 @@ public class SettingActivity extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		this.finish();
 	}
 }

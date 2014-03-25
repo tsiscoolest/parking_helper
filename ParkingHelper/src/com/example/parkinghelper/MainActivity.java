@@ -1,15 +1,17 @@
 package com.example.parkinghelper;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,10 +27,10 @@ public class MainActivity extends Activity {
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private Uri fileUri;
 	private static final int MEDIA_TYPE_IMAGE = 1;
-	private int defaultAlarmHour = 2;
-	private int defaultAlarmMinute = 40;
-	private int alarmHour;
-	private int alarmMinute;
+	private String alarmHour = "12";
+	private String alarmMinute = "30";
+	private String fileName = "AlarmSetting.txt";
+	private static final String TAG = "MEDIA";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class MainActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				// Image captured and saved to fileUri specified in the Intent
 				Toast.makeText(this, "Image saved!", Toast.LENGTH_LONG).show();
-				readSharedPreferences();
+				readFile();
 				setAlarm();
 				setBuiltInAlarm();
 			} else if (resultCode == RESULT_CANCELED) {
@@ -155,8 +157,8 @@ public class MainActivity extends Activity {
 		 * the user
 		 */
 		GregorianCalendar gregCalendar = new GregorianCalendar();
-		gregCalendar.add(Calendar.HOUR_OF_DAY, alarmHour);
-		gregCalendar.add(Calendar.MINUTE, alarmMinute);
+		gregCalendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(alarmHour));
+		gregCalendar.add(Calendar.MINUTE, Integer.parseInt(alarmMinute));
 		// gregCalendar.add(Calendar.SECOND, 5);
 
 		/** Converting the date and time in to milliseconds elapsed since epoch */
@@ -175,20 +177,35 @@ public class MainActivity extends Activity {
 		openNewAlarm.putExtra(AlarmClock.EXTRA_MESSAGE, "ParkingHelper");
 		openNewAlarm.putExtra(AlarmClock.EXTRA_RINGTONE, AlarmClock.VALUE_RINGTONE_SILENT);
 		openNewAlarm.putExtra(AlarmClock.EXTRA_VIBRATE, true);
-		openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, calendar.get(Calendar.HOUR_OF_DAY) + alarmHour);
-		openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, calendar.get(Calendar.MINUTE) + alarmMinute);
+		openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, calendar.get(Calendar.HOUR_OF_DAY) + Integer.parseInt(alarmHour));
+		openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, calendar.get(Calendar.MINUTE) + Integer.parseInt(alarmMinute));
 		openNewAlarm.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
 		startActivity(openNewAlarm);
 	}
 
-	private void readSharedPreferences() {
-		SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+	private void readFile() {
+		File root = android.os.Environment.getExternalStorageDirectory();
 
-		alarmHour = sharedPref.getInt(getString(R.string.alarmHour), defaultAlarmHour);
-		alarmMinute = sharedPref.getInt(getString(R.string.alarmMinute), defaultAlarmMinute);
+		File dir = new File(root.getAbsolutePath() + "/Pictures/ParkingHelper");
+		dir.mkdirs();
+		File file = new File(dir, fileName);
 
-		Toast.makeText(getBaseContext(), "Successfully read new alarm time: " + alarmHour + " " + alarmMinute,
-				Toast.LENGTH_SHORT).show();
+		// Read text from file
+		BufferedReader br = null;
+
+		try {
+			br = new BufferedReader(new FileReader(file));
+			String line;
+
+			if ((line = br.readLine()) != null) alarmHour = line;
+			if ((line = br.readLine()) != null) alarmMinute = line;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			Log.i(TAG, "******File not found. Did you" + " add a READ_EXTERNAL_STORAGE permission to the manifest?");
+			// writeFile();
+		} catch (IOException e) {
+			// You'll need to add proper error handling here
+		}
 	}
 
 	/* Checks if external storage is available for read and write */
