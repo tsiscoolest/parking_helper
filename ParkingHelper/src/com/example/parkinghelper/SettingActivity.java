@@ -36,15 +36,7 @@ public class SettingActivity extends Activity {
 		}
 
 		seekBar();
-		
-		Button btn = (Button) findViewById(R.id.setButton);
-
-		btn.setOnClickListener(new View.OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-		    	writeToSDFile(v);
-		    }
-		});
+		buttonOnClick();
 	}
 
 	@Override
@@ -67,9 +59,9 @@ public class SettingActivity extends Activity {
 		SeekBar hourSeekBar = (SeekBar) findViewById(R.id.hourSeekBar);
 		SeekBar minuteSeekBar = (SeekBar) findViewById(R.id.minuteSeekBar);
 
-		hourSeekBar.setMax(12);
-		hourSeekBar.setProgress(6);
-		minuteSeekBar.setMax(60);
+		hourSeekBar.setMax(23);
+		hourSeekBar.setProgress(12);
+		minuteSeekBar.setMax(59);
 		minuteSeekBar.setProgress(30);
 
 		hourSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -113,6 +105,17 @@ public class SettingActivity extends Activity {
 		});
 	}
 
+	private void buttonOnClick() {
+		Button btn = (Button) findViewById(R.id.setButton);
+
+		btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				writeToSDFile(v);
+			}
+		});
+	}
+
 	/**
 	 * Method to write ascii text characters to file on SD card. Note that you
 	 * must add a WRITE_EXTERNAL_STORAGE permission to the manifest file or this
@@ -149,11 +152,11 @@ public class SettingActivity extends Activity {
 			Toast.makeText(getBaseContext(), "New alarm setting successfully saved!", Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			Log.i(TAG, "******File not found. Did you" + " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
+			Log.i(TAG, "******File not found. Did you" + " add a WRITE_EXTERNAL_STORAGE permission to the manifest?");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.finish();
 	}
 }

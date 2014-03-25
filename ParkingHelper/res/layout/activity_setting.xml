@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Minute: 0"
+        android:text="Minute: 30"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/setButton"
         android:layout_marginTop="60dp"
-        android:text="Hour: 0"
+        android:text="Hour: 12"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
