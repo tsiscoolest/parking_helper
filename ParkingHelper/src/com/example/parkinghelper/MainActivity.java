@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
 
 		if (!isExternalStorageWritable()) {
 			Toast.makeText(getBaseContext(), "External storage is not available!", Toast.LENGTH_SHORT).show();
+			// Kill your current Activity Here:
+			super.onDestroy();
 			this.finish();
 		} else startCamera();
 		// setAlarm();
@@ -76,6 +78,8 @@ public class MainActivity extends Activity {
 			}
 		}
 
+		// Kill your current Activity Here:
+		super.onDestroy();
 		this.finish();
 	}
 

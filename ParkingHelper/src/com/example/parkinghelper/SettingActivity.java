@@ -34,6 +34,8 @@ public class SettingActivity extends Activity {
 
 		if (!isExternalStorageWritable()) {
 			Toast.makeText(getBaseContext(), "External storage is not available!", Toast.LENGTH_SHORT).show();
+			// Kill your current Activity Here:
+			super.onDestroy();
 			this.finish();
 		}
 
@@ -168,6 +170,8 @@ public class SettingActivity extends Activity {
 
 		writeFile();
 
+		// Kill your current Activity Here:
+		super.onDestroy();
 		this.finish();
 	}
 
