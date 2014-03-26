@@ -7,13 +7,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingActivity" >
-
-    <SeekBar
-        android:id="@+id/hourSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hourTextView"
-        android:layout_marginTop="16dp" />
     
     <TextView
         android:id="@+id/minuteTextView"
@@ -21,17 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Minute: 30"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/hourTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/setButton"
-        android:layout_marginTop="60dp"
-        android:text="Hour: 12"
+        android:text="@string/minute"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
@@ -50,5 +33,33 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
         android:text="@string/setButton" />
+
+    <TextView
+        android:id="@+id/settingInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="@string/settingInfo"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/hourTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settingInfoTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/hour"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <SeekBar
+        android:id="@+id/hourSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/settingInfoTextView"
+        android:layout_below="@+id/hourTextView"
+        android:layout_marginTop="17dp" />
 
 </RelativeLayout>

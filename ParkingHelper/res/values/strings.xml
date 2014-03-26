@@ -5,11 +5,10 @@
     <string name="app_name_setting">PH Setting</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_alert">AlertActivity</string>
-    <string name="alarmHour"></string>
-    <string name="alarmMinute"></string>
     <string name="title_activity_setting">SettingActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="setButton">Save Alarm Setting</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hour">Hour: 12</string>
+    <string name="minute">Minute: 30</string>
+    <string name="settingInfo">This time period will added to the exact time Parking Helper used.</string>
 
 </resources>
