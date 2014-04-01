@@ -31,7 +31,7 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 		super.onCreate(savedInstanceState);
 
 		// Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// Remove notification bar
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

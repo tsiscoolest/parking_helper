@@ -10,5 +10,6 @@
     <string name="hour">Hour: 12</string>
     <string name="minute">Minute: 30</string>
     <string name="settingInfo">This time period will added to the exact time Parking Helper used.</string>
+    <string name="title_activity_camera">CameraActivity</string>
 
 </resources>
