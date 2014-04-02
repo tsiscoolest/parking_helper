@@ -188,9 +188,7 @@ public class CameraActivity extends Activity {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			Log.i(TAG, "******File not found. Did you" + " add a READ_EXTERNAL_STORAGE permission to the manifest?");
-			Intent intent = new Intent(this, SettingActivity.class);
-			startActivity(intent);
-			readFile();
+			Toast.makeText(this, "Using default setting", Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			// You'll need to add proper error handling here
 		}
