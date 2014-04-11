@@ -52,7 +52,8 @@ public class CameraActivity extends Activity {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				// Image captured and saved to fileUri specified in the Intent
-				Toast.makeText(this, "Image saved!", Toast.LENGTH_LONG).show();
+				// Toast.makeText(this, "Image saved!",
+				// Toast.LENGTH_LONG).show();
 				setAlarm();
 				setBuiltInAlarm();
 			} else if (resultCode == RESULT_CANCELED) {
@@ -154,7 +155,8 @@ public class CameraActivity extends Activity {
 		alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
 
 		/** Alert is set successfully */
-		Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(getBaseContext(), "Alarm is set successfully",
+		// Toast.LENGTH_SHORT).show();
 	}
 
 	private void setBuiltInAlarm() {
