@@ -17,6 +17,11 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class AlertActivity extends Activity implements GestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener {
@@ -25,6 +30,13 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 	private GestureDetector mDetector;
 
 	Vibrator v;
+
+	/** The view to show the ad. */
+	private AdView adView;
+
+	/* Your ad unit id. Replace with your actual ad unit id. */
+	private static final String AD_UNIT_ID = "INSERT_YOUR_AD_UNIT_ID_HERE";
+	private static final String HASHED_DEVICE_ID = "42583930324B4E345848";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,24 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 
 		// set content view AFTER ABOVE sequence (to avoid crash)
 		setContentView(R.layout.activity_alert);
+
+		// Create an ad.
+		adView = new AdView(this);
+		adView.setAdSize(AdSize.BANNER);
+		adView.setAdUnitId(AD_UNIT_ID);
+
+		// Add the AdView to the view hierarchy. The view will have no size
+		// until the ad is loaded.
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+		layout.addView(adView);
+
+		// Create an ad request. Check logcat output for the hashed device ID to
+		// get test ads on a physical device.
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				.addTestDevice(HASHED_DEVICE_ID).build();
+
+		// Start loading the ad in the background.
+		adView.loadAd(adRequest);
 
 		try {
 			showPic();
@@ -55,6 +85,39 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 		// Set the gesture detector as the double tap
 		// listener.
 		mDetector.setOnDoubleTapListener(this);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.alert, menu);
+		return true;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adView != null) {
+			adView.resume();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		if (adView != null) {
+			adView.pause();
+		}
+		super.onPause();
+	}
+
+	/** Called before the activity is destroyed. */
+	@Override
+	public void onDestroy() {
+		// Destroy the AdView.
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
 	}
 
 	private void vibrate() {
@@ -133,13 +196,6 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 		this.mDetector.onTouchEvent(event);
 		// Be sure to call the superclass implementation
 		return super.onTouchEvent(event);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.alert, menu);
-		return true;
 	}
 
 	@Override
