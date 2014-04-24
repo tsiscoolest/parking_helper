@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.parkinghelper"
+    package="com.limtzushian.parkinghelper"
     android:installLocation="preferExternal"
     android:versionCode="1"
     android:versionName="1.0" >
@@ -20,7 +20,7 @@
 
     <uses-feature android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-feature android:name="android.intent.action.BOOT_COMPLETED" />
-    <uses-feature android:name="android.hardware.camera" />
+    <!-- <uses-feature android:name="android.hardware.camera" /> -->
 
     <application
         android:allowBackup="true"
@@ -30,7 +30,7 @@
         <meta-data android:name="com.google.android.gms.version"
                android:value="@integer/google_play_services_version"/>        
         <activity
-            android:name="com.example.parkinghelper.MainActivity"
+            android:name="com.limtzushian.parkinghelper.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.parkinghelper.AlertActivity"
+            android:name="com.limtzushian.parkinghelper.AlertActivity"
             android:label="@string/title_activity_alert" >
             <intent-filter>
                 <action android:name="android.intent.action.AlertAlarm" />
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.parkinghelper.SettingActivity"
+            android:name="com.limtzushian.parkinghelper.SettingActivity"
             android:label="@string/app_name_setting" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +57,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.parkinghelper.CameraActivity"
+            android:name="com.limtzushian.parkinghelper.CameraActivity"
             android:label="@string/title_activity_camera" >
         </activity>
         <activity android:name="com.google.android.gms.ads.AdActivity"

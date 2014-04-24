@@ -1,4 +1,4 @@
-package com.example.parkinghelper;
+package com.limtzushian.parkinghelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
+import com.limtzushian.parkinghelper.R;
 
 public class CameraActivity extends Activity {
 

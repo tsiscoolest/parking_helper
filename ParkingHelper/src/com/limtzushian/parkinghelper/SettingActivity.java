@@ -1,4 +1,4 @@
-package com.example.parkinghelper;
+package com.limtzushian.parkinghelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.limtzushian.parkinghelper.R;
 
 public class SettingActivity extends Activity {
 

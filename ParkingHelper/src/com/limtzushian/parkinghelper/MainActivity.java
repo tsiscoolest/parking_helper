@@ -1,4 +1,4 @@
-package com.example.parkinghelper;
+package com.limtzushian.parkinghelper;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.widget.Toast;
+import com.limtzushian.parkinghelper.R;
 
 public class MainActivity extends Activity {
 

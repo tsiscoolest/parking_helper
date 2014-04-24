@@ -1,4 +1,4 @@
-package com.example.parkinghelper;
+package com.limtzushian.parkinghelper;
 
 import java.io.IOException;
 
@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.limtzushian.parkinghelper.R;
 
 public class AlertActivity extends Activity implements GestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener {
