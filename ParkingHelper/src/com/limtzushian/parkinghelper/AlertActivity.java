@@ -36,8 +36,8 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 	private AdView adView;
 
 	/* Your ad unit id. Replace with your actual ad unit id. */
-	private static final String AD_UNIT_ID = "INSERT_YOUR_AD_UNIT_ID_HERE";
-	private static final String HASHED_DEVICE_ID = "42583930324B4E345848";
+	private static final String AD_UNIT_ID = "a153590217813c3";
+	private static final String HASHED_DEVICE_ID = ""; // 42583930324B4E345848
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -9,7 +9,6 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="19" />
 
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -20,7 +19,6 @@
 
     <uses-feature android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-feature android:name="android.intent.action.BOOT_COMPLETED" />
-    <!-- <uses-feature android:name="android.hardware.camera" /> -->
 
     <application
         android:allowBackup="true"
