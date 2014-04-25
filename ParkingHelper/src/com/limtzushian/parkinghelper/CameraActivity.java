@@ -64,6 +64,7 @@ public class CameraActivity extends Activity {
 		}
 
 		// Kill your current Activity Here:
+		this.finish();
 		super.onDestroy();
 	}
 

@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 		}
 
 		// Kill your current Activity Here:
+		this.finish();
 		super.onDestroy();
 	}
 
