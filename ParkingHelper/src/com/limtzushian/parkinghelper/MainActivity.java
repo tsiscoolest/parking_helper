@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.widget.Toast;
-import com.limtzushian.parkinghelper.R;
 
 public class MainActivity extends Activity {
 
@@ -29,8 +28,8 @@ public class MainActivity extends Activity {
 		}
 
 		// Kill your current Activity Here:
-		super.onDestroy();
 		this.finish();
+		super.onDestroy();
 	}
 
 	@Override
