@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
-import com.limtzushian.parkinghelper.R;
 
 public class CameraActivity extends Activity {
 
@@ -66,7 +65,6 @@ public class CameraActivity extends Activity {
 
 		// Kill your current Activity Here:
 		super.onDestroy();
-		this.finish();
 	}
 
 	/** Create a file Uri for saving an image or video */

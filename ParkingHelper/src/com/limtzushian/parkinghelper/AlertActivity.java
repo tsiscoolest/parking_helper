@@ -22,7 +22,6 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.limtzushian.parkinghelper.R;
 
 public class AlertActivity extends Activity implements GestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener {
@@ -97,6 +96,8 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 
 	@Override
 	public void onResume() {
+		vibrate();
+
 		super.onResume();
 		if (adView != null) {
 			adView.resume();
@@ -105,6 +106,8 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 
 	@Override
 	public void onPause() {
+		v.cancel();
+
 		if (adView != null) {
 			adView.pause();
 		}
@@ -114,6 +117,8 @@ public class AlertActivity extends Activity implements GestureDetector.OnGesture
 	/** Called before the activity is destroyed. */
 	@Override
 	public void onDestroy() {
+		v.cancel();
+
 		// Destroy the AdView.
 		if (adView != null) {
 			adView.destroy();
