@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.limtzushian.parkinghelper.R;
 
 public class SettingActivity extends Activity {
 
@@ -82,7 +81,7 @@ public class SettingActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.setting, menu);
+		// getMenuInflater().inflate(R.menu.setting, menu);
 		return true;
 	}
 
