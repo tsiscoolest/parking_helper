@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.limtzushian.parkinghelper"
     android:installLocation="preferExternal"
-    android:versionCode="8"
-    android:versionName="1.7" >
+    android:versionCode="9"
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -34,7 +34,8 @@
         </activity>
         <activity
             android:name="com.limtzushian.parkinghelper.AlertActivity"
-            android:label="@string/title_activity_alert" >
+            android:label="@string/title_activity_alert"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.AlertAlarm" />
 
